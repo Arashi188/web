@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments - Teacher Portal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/teacher.css">
+    <link rel="stylesheet" href="../css/assignments.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2><i class="fas fa-chalkboard-teacher"></i> Assignments</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="assignments.html" class="active">Assignments</a></li>
+                    <li><a href="create_assignment.html">Create Assignment</a></li>
+                    <li><a href="exams.html">Exams</a></li>
+                    <li><a href="../php/logout.php">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="assignments-section">
+        <div class="container">
+            <div class="assignments-header">
+                <h1>Assignment Management</h1>
+                <p>Create, manage, and grade student assignments</p>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="location.href='create_assignment.html'">
+                        <i class="fas fa-plus"></i> Create New Assignment
+                    </button>
+                </div>
+            </div>
+
+            <!-- Assignment Statistics -->
+            <div class="assignment-stats">
+                <div class="stat-card">
+                    <i class="fas fa-file-alt"></i>
+                    <div class="stat-number" id="totalAssignments">0</div>
+                    <div class="stat-label">Total Assignments</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-number" id="pendingGrading">0</div>
+                    <div class="stat-label">Pending Grading</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <div class="stat-number" id="activeAssignments">0</div>
+                    <div class="stat-label">Active</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="stat-number" id="submittedCount">0</div>
+                    <div class="stat-label">Submitted</div>
+                </div>
+            </div>
+
+            <!-- Assignments List -->
+            <div class="assignments-list-section">
+                <div class="section-header">
+                    <h2>Your Assignments</h2>
+                    <div class="filter-controls">
+                        <select id="assignmentFilter" onchange="filterAssignments()">
+                            <option value="all">All Assignments</option>
+                            <option value="active">Active</option>
+                            <option value="draft">Draft</option>
+                            <option value="closed">Closed</option>
+                            <option value="grading">Needs Grading</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="assignments-container" id="assignmentsContainer">
+                    <!-- Assignments will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- View Submissions Modal -->
+    <div id="submissionsModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="submissionsModalTitle">Assignment Submissions</h3>
+                <span class="close" onclick="closeSubmissionsModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="submissions-list" id="submissionsList">
+                    <!-- Submissions will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/teacher_assignments.js"></script>
+</body>
+</html>

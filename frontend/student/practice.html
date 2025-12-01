@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Tests - Student Portal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/exams.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2><i class="fas fa-user-graduate"></i> Practice Tests</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="exams.html">Exams</a></li>
+                    <li><a href="practice.html" class="active">Practice Tests</a></li>
+                    <li><a href="assignments.html">Assignments</a></li>
+                    <li><a href="../php/logout.php">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="practice-section">
+        <div class="container">
+            <div class="practice-header">
+                <h1>Practice Tests & Exam Preparation</h1>
+                <p>Prepare for your external examinations with our practice tests</p>
+            </div>
+
+            <!-- Exam Type Selection -->
+            <div class="exam-types">
+                <div class="exam-type-card" onclick="loadPracticeTests('WAEC')">
+                    <div class="exam-type-icon waec">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>WAEC Practice</h3>
+                    <p>West African Examination Council</p>
+                    <div class="exam-level">SS3</div>
+                    <ul class="exam-subjects">
+                        <li>Mathematics</li>
+                        <li>English</li>
+                        <li>Physics</li>
+                        <li>Chemistry</li>
+                        <li>Biology</li>
+                    </ul>
+                </div>
+
+                <div class="exam-type-card" onclick="loadPracticeTests('NECO')">
+                    <div class="exam-type-icon neco">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <h3>NECO Practice</h3>
+                    <p>National Examination Council</p>
+                    <div class="exam-level">SS3</div>
+                    <ul class="exam-subjects">
+                        <li>Mathematics</li>
+                        <li>English</li>
+                        <li>Physics</li>
+                        <li>Chemistry</li>
+                        <li>Biology</li>
+                    </ul>
+                </div>
+
+                <div class="exam-type-card" onclick="loadPracticeTests('JAMB')">
+                    <div class="exam-type-icon jamb">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>JAMB Practice</h3>
+                    <p>Joint Admissions & Matriculation Board</p>
+                    <div class="exam-level">SS3</div>
+                    <ul class="exam-subjects">
+                        <li>English</li>
+                        <li>Mathematics</li>
+                        <li>Physics</li>
+                        <li>Chemistry</li>
+                        <li>Biology</li>
+                    </ul>
+                </div>
+
+                <div class="exam-type-card" onclick="loadPracticeTests('BECE')">
+                    <div class="exam-type-icon bece">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>BECE Practice</h3>
+                    <p>Basic Education Certificate Examination</p>
+                    <div class="exam-level">JSS3</div>
+                    <ul class="exam-subjects">
+                        <li>Mathematics</li>
+                        <li>English</li>
+                        <li>Basic Science</li>
+                        <li>Social Studies</li>
+                        <li>Business Studies</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Recent Practice History -->
+            <div class="practice-history">
+                <h2>Recent Practice Sessions</h2>
+                <div class="history-list" id="practiceHistory">
+                    <!-- Practice history will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practice Tests Modal -->
+    <div id="practiceModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="practiceModalTitle">Practice Tests</h3>
+                <span class="close" onclick="closePracticeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="practice-tests-grid" id="practiceTestsGrid">
+                    <!-- Practice tests will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/student_practice.js"></script>
+</body>
+</html>

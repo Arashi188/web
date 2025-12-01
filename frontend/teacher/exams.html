@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exams Management - Teacher Portal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/teacher.css">
+    <link rel="stylesheet" href="../css/exams.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2><i class="fas fa-chalkboard-teacher"></i> Exams Management</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="exams.html" class="active">Exams</a></li>
+                    <li><a href="create_exam.html">Create Exam</a></li>
+                    <li><a href="assignments.html">Assignments</a></li>
+                    <li><a href="../php/logout.php">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="exams-management-section">
+        <div class="container">
+            <div class="management-header">
+                <h1>Exams & Tests Management</h1>
+                <p>Create, manage, and monitor all exams and tests</p>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="location.href='create_exam.html'">
+                        <i class="fas fa-plus"></i> Create New Exam
+                    </button>
+                    <button class="btn btn-secondary" onclick="location.href='create_exam.html?type=practice'">
+                        <i class="fas fa-graduation-cap"></i> Create Practice Test
+                    </button>
+                </div>
+            </div>
+
+            <!-- Exams Statistics -->
+            <div class="exams-stats">
+                <div class="stat-card">
+                    <i class="fas fa-file-alt"></i>
+                    <div class="stat-number" id="totalExams">0</div>
+                    <div class="stat-label">Total Exams</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-number" id="activeExams">0</div>
+                    <div class="stat-label">Active Exams</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="stat-number" id="completedExams">0</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="stat-number" id="averageScore">0%</div>
+                    <div class="stat-label">Average Score</div>
+                </div>
+            </div>
+
+            <!-- Exams List -->
+            <div class="exams-list-section">
+                <div class="section-header">
+                    <h2>Your Exams & Tests</h2>
+                    <div class="filter-controls">
+                        <select id="examFilter" onchange="filterExams()">
+                            <option value="all">All Exams</option>
+                            <option value="active">Active</option>
+                            <option value="upcoming">Upcoming</option>
+                            <option value="completed">Completed</option>
+                            <option value="practice">Practice Tests</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="exams-table-container">
+                    <table class="exams-table">
+                        <thead>
+                            <tr>
+                                <th>Exam Title</th>
+                                <th>Type</th>
+                                <th>Class</th>
+                                <th>Subject</th>
+                                <th>Duration</th>
+                                <th>Status</th>
+                                <th>Students</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="examsTableBody">
+                            <!-- Exams will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../js/teacher_exams.js"></script>
+</body>
+</html>

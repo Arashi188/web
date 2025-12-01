@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Bright Future School</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2><i class="fas fa-graduation-cap"></i> Student Portal</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="grades.html">My Grades</a></li>
+                    <li><a href="attendance.html">Attendance</a></li>
+                    <li><a href="timetable.html">Timetable</a></li>
+                    <!-- NEW MENU ITEMS -->
+                    <li><a href="exams.html">Exams & Tests</a></li>
+                    <li><a href="practice.html">Practice Tests</a></li>
+                    <li><a href="assignments.html">Assignments</a></li>
+                    <li><a href="../php/logout.php">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Dashboard Content -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="welcome-banner">
+                <h1>Welcome, <span id="studentName">Student</span>!</h1>
+                <p>Class: <span id="studentClass">-</span> | Roll No: <span id="rollNumber">-</span></p>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Overall Average</h3>
+                    <p id="overallAverage">-</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Attendance</h3>
+                    <p id="attendancePercent">-</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-book"></i>
+                    <h3>Subjects</h3>
+                    <p id="totalSubjects">-</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-bell"></i>
+                    <h3>Notifications</h3>
+                    <p id="notificationCount">0</p>
+                </div>
+            </div>
+
+            <!-- NEW: Quick Actions -->
+            <div class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="action-grid">
+                    <div class="action-card" onclick="location.href='exams.html'">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>Take Exams</h3>
+                        <p>Access your scheduled exams</p>
+                    </div>
+                    <div class="action-card" onclick="location.href='practice.html'">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Practice Tests</h3>
+                        <p>WAEC, NECO, JAMB, BECE practice</p>
+                    </div>
+                    <div class="action-card" onclick="location.href='assignments.html'">
+                        <i class="fas fa-tasks"></i>
+                        <h3>Assignments</h3>
+                        <p>View and submit assignments</p>
+                    </div>
+                    <div class="action-card" onclick="location.href='grades.html'">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>View Grades</h3>
+                        <p>Check your performance</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Grades -->
+            <div class="dashboard-section">
+                <h2>Recent Grades</h2>
+                <div class="grades-table" id="recentGrades">
+                    <!-- Grades will be loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Upcoming Events -->
+            <div class="dashboard-section">
+                <h2>Upcoming Events</h2>
+                <div class="events-list" id="upcomingEvents">
+                    <!-- Events will be loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- NEW: Pending Assignments -->
+            <div class="dashboard-section">
+                <h2>Pending Assignments</h2>
+                <div class="assignments-list" id="pendingAssignments">
+                    <!-- Pending assignments will be loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- NEW: Upcoming Exams -->
+            <div class="dashboard-section">
+                <h2>Upcoming Exams</h2>
+                <div class="exams-list" id="upcomingExams">
+                    <!-- Upcoming exams will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../js/student_dashboard.js"></script>
+</body>
+</html>

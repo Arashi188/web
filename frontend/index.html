@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bright Future International School</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2><i class="fas fa-graduation-cap"></i> Bright Future School</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="news.html">News & Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="login-btn"><a href="login.html">Login</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Bright Future International School</h1>
+            <p>Shaping young minds for a brighter tomorrow through quality education and holistic development.</p>
+            <div class="hero-buttons">
+                <a href="admissions.html" class="btn btn-primary">Apply Now</a>
+                <a href="about.html" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="quick-links">
+        <div class="container">
+            <h2>Quick Access</h2>
+            <div class="links-grid">
+                <div class="link-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Student Login</h3>
+                    <p>Access your portal</p>
+                    <a href="login.html?role=student" class="btn-small">Login</a>
+                </div>
+                <div class="link-card">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h3>Staff Login</h3>
+                    <p>Faculty portal</p>
+                    <a href="login.html?role=teacher" class="btn-small">Login</a>
+                </div>
+                <div class="link-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Parents Login</h3>
+                    <p>Track student progress</p>
+                    <a href="login.html?role=parent" class="btn-small">Login</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest News -->
+    <section class="news-section">
+        <div class="container">
+            <h2>Latest News & Events</h2>
+            <div class="news-grid" id="newsContainer">
+                <!-- News will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

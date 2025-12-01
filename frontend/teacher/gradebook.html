@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradebook - Teacher Portal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/teacher.css">
+    <link rel="stylesheet" href="../css/gradebook.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2><i class="fas fa-chalkboard-teacher"></i> Gradebook</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="my_classes.html">My Classes</a></li>
+                    <li><a href="gradebook.html" class="active">Gradebook</a></li>
+                    <li><a href="attendance.html">Attendance</a></li>
+                    <li><a href="students.html">Students</a></li>
+                    <li><a href="../php/logout.php">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Gradebook Content -->
+    <section class="gradebook-section">
+        <div class="container">
+            <div class="gradebook-header">
+                <h1>Gradebook Management</h1>
+                <p>Manage and track student grades efficiently</p>
+            </div>
+
+            <!-- Gradebook Controls -->
+            <div class="gradebook-controls">
+                <div class="control-filters">
+                    <div class="filter-group">
+                        <label for="filterClass">Class</label>
+                        <select id="filterClass" onchange="loadGradebookData()">
+                            <option value="">All Classes</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filterSubject">Subject</label>
+                        <select id="filterSubject" onchange="loadGradebookData()">
+                            <option value="">All Subjects</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filterTerm">Term</label>
+                        <select id="filterTerm" onchange="loadGradebookData()">
+                            <option value="">All Terms</option>
+                            <option value="Term 1">Term 1</option>
+                            <option value="Term 2">Term 2</option>
+                            <option value="Term 3">Term 3</option>
+                            <option value="Final">Final</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-actions">
+                    <button class="btn btn-primary" onclick="showBulkGradeModal()">
+                        <i class="fas fa-plus"></i> Bulk Grade Entry
+                    </button>
+                    <button class="btn btn-secondary" onclick="exportGrades()">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gradebook Stats -->
+            <div class="gradebook-stats" id="gradebookStats">
+                <!-- Stats will be loaded dynamically -->
+            </div>
+
+            <!-- Gradebook Table -->
+            <div class="gradebook-container">
+                <div class="table-responsive">
+                    <table class="gradebook-table" id="gradebookTable">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Roll No</th>
+                                <th>Class</th>
+                                <th>Subject</th>
+                                <th>Term</th>
+                                <th>Marks</th>
+                                <th>Grade</th>
+                                <th>Last Updated</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="gradebookBody">
+                            <!-- Grades will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Bulk Grade Modal -->
+    <div id="bulkGradeModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>Bulk Grade Entry</h3>
+                <span class="close" onclick="closeBulkGradeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="bulkGradeForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bulkClass">Class *</label>
+                            <select id="bulkClass" name="class_id" required onchange="loadBulkGradeStudents()">
+                                <option value="">Select Class</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bulkSubject">Subject *</label>
+                            <select id="bulkSubject" name="subject_id" required>
+                                <option value="">Select Subject</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bulkTerm">Term *</label>
+                            <select id="bulkTerm" name="term" required>
+                                <option value="Term 1">Term 1</option>
+                                <option value="Term 2">Term 2</option>
+                                <option value="Term 3">Term 3</option>
+                                <option value="Final">Final</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="bulk-grade-table">
+                        <h4>Enter Grades for Students</h4>
+                        <div class="table-responsive">
+                            <table class="bulk-table">
+                                <thead>
+                                    <tr>
+                                        <th>Student</th>
+                                        <th>Roll No</th>
+                                        <th>Marks (0-100)</th>
+                                        <th>Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bulkGradeStudents">
+                                    <!-- Students will be loaded dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeBulkGradeModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save All Grades</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Grade Modal -->
+    <div id="editGradeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Grade</h3>
+                <span class="close" onclick="closeEditGradeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="editGradeForm">
+                    <input type="hidden" id="editGradeId" name="grade_id">
+                    <div class="form-group">
+                        <label for="editStudent">Student</label>
+                        <input type="text" id="editStudent" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="editSubject">Subject</label>
+                        <input type="text" id="editSubject" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="editMarks">Marks *</label>
+                        <input type="number" id="editMarks" name="marks" min="0" max="100" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editTerm">Term *</label>
+                        <select id="editTerm" name="term" required>
+                            <option value="Term 1">Term 1</option>
+                            <option value="Term 2">Term 2</option>
+                            <option value="Term 3">Term 3</option>
+                            <option value="Final">Final</option>
+                        </select>
+                    </div>
+                    <div class="grade-preview">
+                        <strong>Calculated Grade: <span id="gradePreview">-</span></strong>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeEditGradeModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Update Grade</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/gradebook.js"></script>
+</body>
+</html>
