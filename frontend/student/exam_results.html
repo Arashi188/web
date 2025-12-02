@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Results - Student Portal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/exam_results.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2><i class="fas fa-user-graduate"></i> Exam Results</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="student-exam.html">Exams</a></li>
+                    <li><a href="practice.html">Practice Tests</a></li>
+                    <li><a href="assignments.html">Assignments</a></li>
+                    <li><a href="../php/logout.php">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="results-section">
+        <div class="container">
+            <!-- Results Header -->
+            <div class="results-header">
+                <div class="header-content">
+                    <h1>Exam Results</h1>
+                    <p>Detailed performance analysis of your exam</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" onclick="printResults()">
+                        <i class="fas fa-print"></i> Print Results
+                    </button>
+                    <button class="btn btn-primary" onclick="shareResults()">
+                        <i class="fas fa-share-alt"></i> Share
+                    </button>
+                </div>
+            </div>
+
+            <!-- Performance Summary -->
+            <div class="performance-summary">
+                <div class="score-card">
+                    <div class="score-circle">
+                        <div class="circle-progress">
+                            <svg width="120" height="120" viewBox="0 0 120 120">
+                                <circle cx="60" cy="60" r="54" stroke="#e9ecef" stroke-width="8" fill="none"></circle>
+                                <circle id="progressCircle" cx="60" cy="60" r="54" stroke="#3498db" stroke-width="8" 
+                                        fill="none" stroke-linecap="round" transform="rotate(-90 60 60)"
+                                        stroke-dasharray="339.292" stroke-dashoffset="0"></circle>
+                            </svg>
+                            <div class="score-percentage" id="scorePercentage">0%</div>
+                        </div>
+                    </div>
+                    <div class="score-details">
+                        <h3 id="examTitle">Exam Title</h3>
+                        <div class="detail-item">
+                            <span class="detail-label">Subject:</span>
+                            <span class="detail-value" id="resultSubject">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Date Taken:</span>
+                            <span class="detail-value" id="dateTaken">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Time Spent:</span>
+                            <span class="detail-value" id="timeSpent">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Score Breakdown -->
+                <div class="score-breakdown">
+                    <h3>Score Breakdown</h3>
+                    <div class="breakdown-grid">
+                        <div class="breakdown-item">
+                            <div class="breakdown-label">Total Marks</div>
+                            <div class="breakdown-value" id="totalMarks">0</div>
+                        </div>
+                        <div class="breakdown-item">
+                            <div class="breakdown-label">Marks Obtained</div>
+                            <div class="breakdown-value" id="marksObtained">0</div>
+                        </div>
+                        <div class="breakdown-item">
+                            <div class="breakdown-label">Grade</div>
+                            <div class="breakdown-value grade-badge" id="examGrade">-</div>
+                        </div>
+                        <div class="breakdown-item">
+                            <div class="breakdown-label">Status</div>
+                            <div class="breakdown-value status-badge" id="examStatus">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questions Review -->
+            <div class="questions-review">
+                <div class="section-header">
+                    <h2>Question Review</h2>
+                    <div class="review-filters">
+                        <button class="filter-btn active" onclick="filterQuestions('all')">All</button>
+                        <button class="filter-btn" onclick="filterQuestions('correct')">Correct</button>
+                        <button class="filter-btn" onclick="filterQuestions('incorrect')">Incorrect</button>
+                        <button class="filter-btn" onclick="filterQuestions('ungraded')">Ungraded</button>
+                    </div>
+                </div>
+
+                <div class="questions-container" id="questionsContainer">
+                    <!-- Questions will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Performance Insights -->
+            <div class="performance-insights">
+                <h2>Performance Insights</h2>
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Performance Trend</h4>
+                        <p id="performanceTrend">-</p>
+                    </div>
+                    <div class="insight-card">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <h4>Accuracy Rate</h4>
+                        <p id="accuracyRate">-</p>
+                    </div>
+                    <div class="insight-card">
+                        <i class="fas fa-clock"></i>
+                        <h4>Time Management</h4>
+                        <p id="timeManagement">-</p>
+                    </div>
+                    <div class="insight-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h4>Recommendations</h4>
+                        <p id="recommendations">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="retakeExam()">
+                    <i class="fas fa-redo"></i> Retake Exam
+                </button>
+                <button class="btn btn-secondary" onclick="viewSolutions()">
+                    <i class="fas fa-book-open"></i> View Solutions
+                </button>
+                <button class="btn btn-outline" onclick="goToExams()">
+                    <i class="fas fa-arrow-left"></i> Back to Exams
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Modal -->
+    <div id="solutionModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>Question Solution</h3>
+                <span class="close" onclick="closeSolutionModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="solution-content" id="solutionContent">
+                    <!-- Solution will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/exam_results.js"></script>
+</body>
+</html>

@@ -185,3 +185,12 @@ function showNotification(message, type) {
         }
     }, 5000);
 }
+// In teacher_assignments.js, add this function:
+function gradeSubmissions(assignmentId) {
+    window.location.href = `grade_assignment.html?assignment_id=${assignmentId}`;
+}
+
+// And update the assignment-actions in displayAssignments function:
+`<button class="btn btn-primary btn-small" onclick="gradeSubmissions(${assignment.id})">
+    <i class="fas fa-check-circle"></i> Grade
+</button>`
