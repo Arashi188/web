@@ -201,7 +201,6 @@ body {
 .news-content {
     padding: 1.5rem;
 }
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-menu {

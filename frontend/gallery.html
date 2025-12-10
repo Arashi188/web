@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samfra College</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/homepage.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css/2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <nav class="main-nav">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div class="logo-text">
+                            <h1>Samfra College</h1>
+                            <p>International School</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="frontend/about.html">About Us</a></li>
+                    <li><a href="frontend/academics.html">Academics</a></li>
+                    <li><a href="frontend/admissions.html">Admissions</a></li>
+                    <li class="dropdown">
+                        <a href="#">Portals <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="frontend/student/login.html">Student Portal</a>
+                            <a href="frontend/teacher/login.html">Teacher Portal</a>
+                            <a href="frontend/parent/login.html">Parent Portal</a>
+                        </div>
+                    </li>
+                    <li><a href="frontend/gallery.html">Gallery</a></li>
+                    <li><a href="frontend/news.html">News & Events</a></li>
+                    <li><a href="frontend/contact.html">Contact</a></li>
+                    <li class="nav-login">
+                        <a href="frontend/login.html" class="btn-login">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <section id="gallery">
+    <h2>School Gallery</h2>
+
+    <div class="slideshow-container" id="slideshow">
+
+      <div class="mySlides fade">
+        <img src="images/set 2k25(1).jpg" alt="School Entrance">
+      </div>
+
+      <div class="mySlides fade">
+        <img src="images/set 2k25(2).jpg" alt="Students in Class">
+      </div>
+
+      <div class="mySlides fade">
+        <img src="images/set 2k25(3).jpg" alt="Sports Day">
+      </div>
+
+      <div class="mySlides fade">
+        <img src="images/set 2k25(8).jpg" alt="Graduation Ceremony">
+      </div>
+
+      <div class="mySlides fade">
+        <img src="images/set 2k25(6).jpg" alt="Graduation Ceremony">
+      </div>
+
+      <div class="mySlides fade">
+        <img src="images/set 2k25(5).jpg" alt="Graduation Ceremony">
+      </div>
+
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <div style="text-align:center">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+      <span class="dot" onclick="currentSlide(4)"></span>
+    </div>
+  </section>
+
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" alt="">
+    <div class="lightbox-close">✕</div>
+  </div>
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Samfra College</h3>
+                    </div>
+                    <p class="footer-about">
+                        Providing quality education since 2005. We are committed to developing well-rounded individuals prepared for global challenges.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="frontend/about.html">About Us</a></li>
+                        <li><a href="frontend/academics.html">Academics</a></li>
+                        <li><a href="frontend/admissions.html">Admissions</a></li>
+                        <li><a href="frontend/gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Student Portals</h4>
+                    <ul class="footer-links">
+                        <li><a href="frontend/student/login.html">Student Login</a></li>
+                        <li><a href="frontend/teacher/login.html">Teacher Login</a></li>
+                        <li><a href="frontend/parent/login.html">Parent Login</a></li>
+                        <li><a href="frontend/student/student-exam.html">Online Exams</a></li>
+                        <li><a href="frontend/student/practice.html">Practice Tests</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Education Street, Victoria Island, Lagos</p>
+                        <p><i class="fas fa-phone"></i> +234 812 345 6789</p>
+                        <p><i class="fas fa-envelope"></i> info@Samfra College.edu.ng</p>
+                        <p><i class="fas fa-clock"></i> Mon - Fri: 7:30 AM - 4:30 PM</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Bright Future International School. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="frontend/privacy.html">Privacy Policy</a>
+                    <a href="frontend/terms.html">Terms of Service</a>
+                    <a href="frontend/sitemap.html">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="frontend/js/homepage.js"></script>
+</body>
+</html>
