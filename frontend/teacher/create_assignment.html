@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Assignment - Teacher Portal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/teacher.css">
+    <link rel="stylesheet" href="../css/assignments.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2><i class="fas fa-chalkboard-teacher"></i> Create Assignment</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="assignments.html">Assignments</a></li>
+                    <li><a href="create_assignment.html" class="active">Create Assignment</a></li>
+                    <li><a href="exams.html">Exams</a></li>
+                    <li><a href="../php/logout.php">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="create-assignment-section">
+        <div class="container">
+            <div class="create-assignment-header">
+                <h1>Create New Assignment</h1>
+                <p>Create assignments for your students with clear instructions and deadlines</p>
+            </div>
+
+            <form id="assignmentForm" onsubmit="saveAssignment(event)">
+                <!-- Basic Assignment Information -->
+                <div class="form-section">
+                    <h3><i class="fas fa-info-circle"></i> Assignment Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="assignmentTitle">Assignment Title *</label>
+                            <input type="text" id="assignmentTitle" name="title" required placeholder="Enter assignment title">
+                        </div>
+                        <div class="form-group">
+                            <label for="assignmentClass">Class *</label>
+                            <select id="assignmentClass" name="class_id" required onchange="loadClassSubjects()">
+                                <option value="">Select Class</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="assignmentSubject">Subject *</label>
+                            <select id="assignmentSubject" name="subject_id" required>
+                                <option value="">Select Subject</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="totalMarks">Total Marks *</label>
+                            <input type="number" id="totalMarks" name="total_marks" min="1" max="100" required value="100">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dueDate">Due Date & Time *</label>
+                            <input type="datetime-local" id="dueDate" name="due_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="assignmentStatus">Status</label>
+                            <select id="assignmentStatus" name="status">
+                                <option value="draft">Save as Draft</option>
+                                <option value="published">Publish Immediately</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Assignment Details -->
+                <div class="form-section">
+                    <h3><i class="fas fa-file-alt"></i> Assignment Details</h3>
+                    <div class="form-group">
+                        <label for="assignmentDescription">Description *</label>
+                        <textarea id="assignmentDescription" name="description" rows="4" required placeholder="Describe the assignment objectives and requirements..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="assignmentInstructions">Instructions</label>
+                        <textarea id="assignmentInstructions" name="instructions" rows="3" placeholder="Provide specific instructions for completing the assignment..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assignmentAttachment">Attachment (Optional)</label>
+                        <div class="file-upload">
+                            <input type="file" id="assignmentAttachment" name="attachment" accept=".pdf,.doc,.docx,.jpg,.png">
+                            <label for="assignmentAttachment" class="file-upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Choose file or drag here</span>
+                            </label>
+                            <div class="file-info" id="fileInfo">No file chosen</div>
+                        </div>
+                        <small class="file-hint">Supported formats: PDF, Word, JPG, PNG (Max: 10MB)</small>
+                    </div>
+                </div>
+
+                <!-- Preview Section -->
+                <div class="form-section">
+                    <h3><i class="fas fa-eye"></i> Preview</h3>
+                    <div class="assignment-preview">
+                        <h4 id="previewTitle">Assignment Title</h4>
+                        <div class="preview-meta">
+                            <span id="previewClass">Class: -</span>
+                            <span id="previewSubject">Subject: -</span>
+                            <span id="previewMarks">Marks: -</span>
+                            <span id="previewDueDate">Due: -</span>
+                        </div>
+                        <div class="preview-description" id="previewDescription">
+                            Assignment description will appear here...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="saveDraft()">
+                        <i class="fas fa-save"></i> Save Draft
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Publish Assignment
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <script src="../js/create_assignment.js"></script>
+</body>
+</html>

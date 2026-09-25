@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Assignment - Teacher Portal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/teacher.css">
+    <link rel="stylesheet" href="../css/grading.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2><i class="fas fa-chalkboard-teacher"></i> Grade Assignment</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="assignments.html">Assignments</a></li>
+                    <li><a href="grade_assignment.html" class="active">Grade</a></li>
+                    <li><a href="../php/logout.php">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="grading-section">
+        <div class="container">
+            <div class="grading-header">
+                <h1 id="assignmentTitle">Grade Student Submissions</h1>
+                <p>Review and grade student assignment submissions</p>
+            </div>
+
+            <!-- Assignment Info -->
+            <div class="assignment-info-card">
+                <div class="assignment-details">
+                    <h3>Assignment Details</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">Subject:</span>
+                            <span id="detailSubject" class="detail-value">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Class:</span>
+                            <span id="detailClass" class="detail-value">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Total Marks:</span>
+                            <span id="detailTotalMarks" class="detail-value">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Due Date:</span>
+                            <span id="detailDueDate" class="detail-value">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Submissions:</span>
+                            <span id="detailSubmissions" class="detail-value">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Graded:</span>
+                            <span id="detailGraded" class="detail-value">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Submissions -->
+            <div class="submissions-container">
+                <div class="section-header">
+                    <h2>Student Submissions</h2>
+                    <div class="filter-controls">
+                        <select id="submissionFilter" onchange="filterSubmissions()">
+                            <option value="all">All Submissions</option>
+                            <option value="ungraded">Ungraded</option>
+                            <option value="graded">Graded</option>
+                            <option value="late">Late Submissions</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="submissions-list" id="submissionsList">
+                    <!-- Submissions will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grading Modal -->
+    <div id="gradingModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="gradingModalTitle">Grade Submission</h3>
+                <span class="close" onclick="closeGradingModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="grading-container">
+                    <!-- Student Info -->
+                    <div class="student-info">
+                        <h4 id="studentName">Student Name</h4>
+                        <p id="studentDetails">Roll No: - | Submitted: -</p>
+                    </div>
+
+                    <!-- Original Assignment -->
+                    <div class="assignment-section">
+                        <h5>Assignment Instructions</h5>
+                        <div class="assignment-content" id="assignmentInstructions">
+                            <!-- Assignment instructions will go here -->
+                        </div>
+                        <div class="assignment-attachment" id="assignmentAttachment">
+                            <!-- Assignment attachment will go here -->
+                        </div>
+                    </div>
+
+                    <!-- Student Submission -->
+                    <div class="submission-section">
+                        <h5>Student's Work</h5>
+                        <div class="submission-content" id="studentSubmission">
+                            <!-- Student submission will go here -->
+                        </div>
+                        <div class="submission-attachment" id="submissionAttachment">
+                            <!-- Student attachment will go here -->
+                        </div>
+                    </div>
+
+                    <!-- Grading Form -->
+                    <form id="gradingForm" onsubmit="submitGrade(event)">
+                        <input type="hidden" id="submissionId" name="submission_id">
+                        
+                        <div class="grading-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="marksObtained">Marks Awarded *</label>
+                                    <input type="number" id="marksObtained" name="marks_obtained" 
+                                           min="0" max="100" step="0.5" required>
+                                    <small>Out of <span id="maxMarks">100</span> marks</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gradePercentage">Percentage</label>
+                                    <input type="text" id="gradePercentage" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="teacherFeedback">Feedback to Student</label>
+                                <textarea id="teacherFeedback" name="teacher_feedback" rows="4" 
+                                          placeholder="Provide constructive feedback on the student's work..."></textarea>
+                            </div>
+
+                            <div class="grading-actions">
+                                <button type="button" class="btn btn-secondary" onclick="skipGrading()">
+                                    <i class="fas fa-forward"></i> Skip
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-check-circle"></i> Submit Grade
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/grade_assignment.js"></script>
+</body>
+</html>

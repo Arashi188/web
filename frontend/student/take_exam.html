@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take Exam - Student Portal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/exam_taking.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Exam Header -->
+    <div class="exam-header" id="examHeader">
+        <div class="container">
+            <div class="exam-header-content">
+                <div class="exam-title">
+                    <h2 id="examTitle">Loading Exam...</h2>
+                    <p id="examSubject">Subject: - | Duration: - minutes</p>
+                </div>
+                <div class="exam-timer">
+                    <div class="timer-display" id="timerDisplay">
+                        <i class="fas fa-clock"></i>
+                        <span id="timer">00:00:00</span>
+                    </div>
+                    <div class="timer-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="exam-controls">
+                    <button class="btn btn-secondary btn-small" onclick="toggleFullscreen()" id="fullscreenBtn">
+                        <i class="fas fa-expand"></i> Fullscreen
+                    </button>
+                    <button class="btn btn-danger btn-small" onclick="submitExam()" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i> Submit Exam
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exam Container -->
+    <div class="exam-container">
+        <div class="container">
+            <!-- Question Navigation -->
+            <div class="question-navigation">
+                <div class="navigation-header">
+                    <h4>Questions</h4>
+                    <span id="answeredCount">0/0 answered</span>
+                </div>
+                <div class="question-numbers" id="questionNumbers">
+                    <!-- Question numbers will be loaded here -->
+                </div>
+                <div class="navigation-hints">
+                    <div class="hint-item">
+                        <span class="hint-dot answered"></span>
+                        <span>Answered</span>
+                    </div>
+                    <div class="hint-item">
+                        <span class="hint-dot current"></span>
+                        <span>Current</span>
+                    </div>
+                    <div class="hint-item">
+                        <span class="hint-dot unanswered"></span>
+                        <span>Unanswered</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question Area -->
+            <div class="question-area">
+                <div class="question-header">
+                    <h3>Question <span id="currentQuestionNumber">1</span></h3>
+                    <div class="question-marks">
+                        <span class="marks-badge" id="questionMarks">0 marks</span>
+                    </div>
+                </div>
+
+                <!-- Exam Instructions -->
+                <div class="exam-instructions" id="examInstructions">
+                    <div class="instructions-content">
+                        <h4><i class="fas fa-info-circle"></i> Exam Instructions</h4>
+                        <div id="instructionsText">
+                            <p>Please read all instructions carefully before starting.</p>
+                            <ul>
+                                <li>You cannot go back once you submit an answer</li>
+                                <li>The timer will start when you click "Start Exam"</li>
+                                <li>All answers are auto-saved</li>
+                                <li>Internet connection is required</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-primary btn-start" onclick="startExam()" id="startBtn">
+                            <i class="fas fa-play"></i> Start Exam
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Questions Container -->
+                <div class="questions-container" id="questionsContainer" style="display: none;">
+                    <!-- Question content will be loaded here -->
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="question-navigation-buttons" id="navButtons" style="display: none;">
+                    <button class="btn btn-secondary" onclick="previousQuestion()" id="prevBtn">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Auto-save Indicator -->
+                <div class="auto-save-indicator" id="autoSaveIndicator">
+                    <i class="fas fa-save"></i>
+                    <span id="saveStatus">Auto-save enabled</span>
+                    <span class="last-save" id="lastSave">Last saved: Just now</span>
+                </div>
+            </div>
+
+            <!-- Exam Summary -->
+            <div class="exam-summary">
+                <div class="summary-header">
+                    <h4>Exam Summary</h4>
+                    <button class="btn btn-small btn-outline" onclick="toggleSummary()">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <div class="summary-content">
+                    <div class="summary-item">
+                        <span>Total Questions:</span>
+                        <strong id="totalQuestions">0</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Answered:</span>
+                        <strong id="summaryAnswered">0</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Unanswered:</span>
+                        <strong id="summaryUnanswered">0</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Time Left:</span>
+                        <strong id="summaryTimeLeft">-</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Total Marks:</span>
+                        <strong id="summaryTotalMarks">0</strong>
+                    </div>
+                </div>
+                <div class="summary-warning" id="summaryWarning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Complete all questions before submitting</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Submit Exam</h3>
+                <span class="close" onclick="closeConfirmationModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="confirmation-content">
+                    <div class="confirmation-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h4>Are you sure you want to submit?</h4>
+                    <p>You have <span id="unansweredCountModal">0</span> unanswered questions.</p>
+                    <div class="confirmation-stats">
+                        <div class="stat">
+                            <span>Answered:</span>
+                            <strong id="answeredCountModal">0</strong>
+                        </div>
+                        <div class="stat">
+                            <span>Time Used:</span>
+                            <strong id="timeUsedModal">0:00</strong>
+                        </div>
+                    </div>
+                    <div class="confirmation-actions">
+                        <button class="btn btn-secondary" onclick="closeConfirmationModal()">
+                            Continue Exam
+                        </button>
+                        <button class="btn btn-primary" onclick="confirmSubmit()">
+                            Yes, Submit Exam
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Save Modal -->
+    <div id="emergencyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Connection Lost</h3>
+            </div>
+            <div class="modal-body">
+                <p>Your internet connection was lost. Answers are being saved locally.</p>
+                <div class="emergency-actions">
+                    <button class="btn btn-primary" onclick="retryConnection()">
+                        <i class="fas fa-sync-alt"></i> Retry Connection
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/exam_taking.js"></script>
+</body>
+</html>

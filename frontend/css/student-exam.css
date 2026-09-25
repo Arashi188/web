@@ -1,0 +1,252 @@
+/* Exams Section */
+.exams-section {
+    padding: 100px 0 50px;
+    background: #f8f9fa;
+    min-height: 100vh;
+}
+
+.exams-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.exams-header h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+}
+
+.exams-header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Exam Statistics */
+.exam-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.exam-stats .stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.exam-stats .stat-card i {
+    font-size: 2rem;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+}
+
+.exam-stats .stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.exam-stats .stat-label {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Exams Category */
+.exams-category {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.exams-category h2 {
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Exams Grid */
+.exams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.exam-card {
+    background: var(--light);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--secondary);
+    transition: all 0.3s;
+}
+
+.exam-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.exam-card.upcoming {
+    border-left-color: var(--success);
+}
+
+.exam-card.active {
+    border-left-color: var(--warning);
+    animation: pulse 2s infinite;
+}
+
+.exam-card.completed {
+    border-left-color: #6c757d;
+    opacity: 0.8;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(243, 156, 18, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0); }
+}
+
+.exam-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+}
+
+.exam-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.exam-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Exam History */
+.exam-history {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--light);
+    border-radius: 8px;
+    border-left: 4px solid var(--secondary);
+    transition: all 0.3s;
+}
+
+.history-item:hover {
+    transform: translateX(5px);
+}
+
+.history-info h4 {
+    margin: 0 0 0.25rem 0;
+    color: var(--dark);
+}
+
+.history-info p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.history-score {
+    text-align: right;
+}
+
+.score-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.score-label {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* No Exams Message */
+.no-exams {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+}
+
+.no-exams i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #adb5bd;
+}
+
+/* Exam Details Modal */
+.exam-details {
+    padding: 1rem 0;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.detail-value {
+    color: #666;
+}
+
+.instructions-box {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 5px;
+    margin: 1rem 0;
+    border-left: 3px solid var(--secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .exam-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .exams-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .history-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .history-score {
+        text-align: left;
+        width: 100%;
+    }
+}

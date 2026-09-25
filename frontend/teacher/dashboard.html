@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - Bright Future School</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/teacher.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2><i class="fas fa-chalkboard-teacher"></i> Teacher Portal</h2>
+                </div>
+                <!-- ADD NEW MENU ITEMS TO YOUR EXISTING FILE: -->
+    <ul class="nav-menu">
+        <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        <li><a href="my_classes.html">My Classes</a></li>
+        <li><a href="gradebook.html">Gradebook</a></li>
+        <li><a href="attendance.html">Attendance</a></li>
+        <li><a href="students.html">Students</a></li>
+        <li><a href="exams.html">Exams Management</a></li>
+        <li><a href="create_exam.html">Create Exam</a></li>
+        <li><a href="assignments.html">Assignments</a></li>
+        <li><a href="../php/logout.php">Logout</a></li>
+    </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Dashboard Content -->
+    <section class="teacher-dashboard">
+        <div class="container">
+            <div class="welcome-banner">
+                <h1>Welcome, <span id="teacherName">Teacher</span>!</h1>
+                <p>Manage your classes, grades, and students efficiently</p>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Total Students</h3>
+                    <p id="totalStudents">-</p>
+                    <span class="stat-label">Across all classes</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Subjects</h3>
+                    <p id="totalSubjects">-</p>
+                    <span class="stat-label">Teaching</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-tasks"></i>
+                    <h3>Pending Grades</h3>
+                    <p id="pendingGrades">-</p>
+                    <span class="stat-label">To be entered</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-calendar-day"></i>
+                    <h3>Today's Classes</h3>
+                    <p id="todaysClasses">-</p>
+                    <span class="stat-label">Scheduled</span>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="action-grid">
+                    <div class="action-card" onclick="location.href='gradebook.html'">
+                        <i class="fas fa-edit"></i>
+                        <h3>Enter Grades</h3>
+                        <p>Add or update student grades</p>
+                    </div>
+                    <div class="action-card" onclick="location.href='attendance.html'">
+                        <i class="fas fa-clipboard-check"></i>
+                        <h3>Take Attendance</h3>
+                        <p>Mark student attendance</p>
+                    </div>
+                    <div class="action-card" onclick="location.href='my_classes.html'">
+                        <i class="fas fa-list-alt"></i>
+                        <h3>View Classes</h3>
+                        <p>See your assigned classes</p>
+                    </div>
+                    <div class="action-card" onclick="showAddGradeModal()">
+                        <i class="fas fa-plus-circle"></i>
+                        <h3>Add Grade</h3>
+                        <p>Quick grade entry</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2>Recent Activity</h2>
+                    <button class="btn btn-secondary" onclick="loadRecentActivity()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+                <div class="activity-list" id="recentActivity">
+                    <!-- Activity will be loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Upcoming Deadlines -->
+            <div class="dashboard-section">
+                <h2>Upcoming Deadlines</h2>
+                <div class="deadlines-list" id="upcomingDeadlines">
+                    <!-- Deadlines will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Grade Modal -->
+    <div id="gradeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Quick Grade Entry</h3>
+                <span class="close" onclick="closeGradeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="quickGradeForm">
+                    <div class="form-group">
+                        <label for="gradeClass">Class</label>
+                        <select id="gradeClass" name="class_id" required>
+                            <option value="">Select Class</option>
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="gradeSubject">Subject</label>
+                        <select id="gradeSubject" name="subject_id" required>
+                            <option value="">Select Subject</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="gradeStudent">Student</label>
+                        <select id="gradeStudent" name="student_id" required>
+                            <option value="">Select Student</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="gradeMarks">Marks</label>
+                        <input type="number" id="gradeMarks" name="marks" min="0" max="100" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gradeTerm">Term</label>
+                        <select id="gradeTerm" name="term" required>
+                            <option value="Term 1">Term 1</option>
+                            <option value="Term 2">Term 2</option>
+                            <option value="Term 3">Term 3</option>
+                            <option value="Final">Final</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeGradeModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Grade</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="../js/teacher_dashboard.js"></script>
+</body>
+</html>
