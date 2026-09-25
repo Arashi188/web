@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments - Student Portal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/assignments.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2><i class="fas fa-user-graduate"></i> Assignments</h2>
+                </div>
+    <ul class="nav-menu">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="assignments.html" class="active">Assignments</a></li>
+        <li><a href="student-exam.html">Exams</a></li> <!-- FIXED -->
+        <li><a href="practice.html">Practice Tests</a></li>
+        <li><a href="../php/logout.php">Logout</a></li>
+    </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="student-assignments-section">
+        <div class="container">
+            <div class="assignments-header">
+                <h1>My Assignments</h1>
+                <p>View, complete, and submit your assignments</p>
+            </div>
+
+            <!-- Assignment Statistics -->
+            <div class="assignment-stats">
+                <div class="stat-card">
+                    <i class="fas fa-tasks"></i>
+                    <div class="stat-number" id="totalAssigned">0</div>
+                    <div class="stat-label">Total Assigned</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="stat-number" id="submittedCount">0</div>
+                    <div class="stat-label">Submitted</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <div class="stat-number" id="pendingCount">0</div>
+                    <div class="stat-label">Pending</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="stat-number" id="averageScore">-</div>
+                    <div class="stat-label">Average Score</div>
+                </div>
+            </div>
+
+            <!-- Assignments Tabs -->
+            <div class="assignments-tabs">
+                <button class="tab-button active" onclick="openTab('pending')">Pending Assignments</button>
+                <button class="tab-button" onclick="openTab('submitted')">Submitted</button>
+                <button class="tab-button" onclick="openTab('graded')">Graded</button>
+            </div>
+
+            <!-- Pending Assignments -->
+            <div id="pending" class="tab-content active">
+                <div class="assignments-grid" id="pendingAssignments">
+                    <!-- Pending assignments will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Submitted Assignments -->
+            <div id="submitted" class="tab-content">
+                <div class="assignments-grid" id="submittedAssignments">
+                    <!-- Submitted assignments will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Graded Assignments -->
+            <div id="graded" class="tab-content">
+                <div class="assignments-grid" id="gradedAssignments">
+                    <!-- Graded assignments will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Submit Assignment Modal -->
+    <div id="submitModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="submitModalTitle">Submit Assignment</h3>
+                <span class="close" onclick="closeSubmitModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="submitAssignmentForm">
+                    <input type="hidden" id="submitAssignmentId" name="assignment_id">
+                    
+                    <div class="assignment-info">
+                        <h4 id="modalAssignmentTitle"></h4>
+                        <p id="modalAssignmentDesc"></p>
+                        <div class="due-date-warning" id="dueDateWarning"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="submissionText">Your Work *</label>
+                        <textarea id="submissionText" name="submission_text" rows="6" placeholder="Type your assignment here or attach a file..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="submissionAttachment">Attachment (Optional)</label>
+                        <div class="file-upload">
+                            <input type="file" id="submissionAttachment" name="attachment" accept=".pdf,.doc,.docx,.jpg,.png,.txt">
+                            <label for="submissionAttachment" class="file-upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Choose file or drag here</span>
+                            </label>
+                            <div class="file-info" id="submissionFileInfo">No file chosen</div>
+                        </div>
+                        <small class="file-hint">Supported formats: PDF, Word, Images, Text (Max: 10MB)</small>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeSubmitModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit Assignment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/student_assignments.js"></script>
+</body>
+</html>
