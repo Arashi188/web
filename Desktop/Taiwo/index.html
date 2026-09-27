@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#fff6f8" />
+<title>For Taiwo 🤍 — Happy Birthday</title>
+<meta name="description" content="A little something for my sweet, sweet girl." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Inter:wght@300;400;500&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  :root{
+    --pink:#ff8fab;
+    --deep:#7a2e4a;
+    --ink:#5c2b3c;
+    --muted:#c98aa2;
+    --gold:#e8b96a;
+  }
+
+  html { scroll-behavior:smooth; }
+
+  body{
+    font-family:'Inter', system-ui, sans-serif;
+    color:var(--ink);
+    background:#fff8f9;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* ---------- soft background ---------- */
+  .bg{
+    position:fixed; inset:0; z-index:-3;
+    background:
+      radial-gradient(circle at 18% 15%, #ffe3ec 0%, transparent 55%),
+      radial-gradient(circle at 82% 12%, #fff0dc 0%, transparent 50%),
+      radial-gradient(circle at 50% 95%, #ffe9f0 0%, transparent 60%),
+      #fff8f9;
+  }
+
+  /* ---------- floating hearts ---------- */
+  .hearts{
+    position:fixed; inset:0; z-index:-2;
+    pointer-events:none; overflow:hidden;
+  }
+  .hearts span{
+    position:absolute;
+    bottom:-12vh;
+    animation:floatUp linear infinite;
+    will-change:transform, opacity;
+    user-select:none;
+  }
+  @keyframes floatUp{
+    0%   { transform:translateY(0) rotate(0deg);        opacity:0; }
+    10%  { opacity:.55; }
+    85%  { opacity:.4; }
+    100% { transform:translateY(-128vh) rotate(26deg);  opacity:0; }
+  }
+
+  /* ---------- sparkles layer ---------- */
+  .sparkles{
+    position:fixed; inset:0; z-index:-1;
+    pointer-events:none;
+  }
+  .sparkles span{
+    position:absolute;
+    width:3px; height:3px;
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 0 8px rgba(255,180,210,.9), 0 0 14px rgba(255,143,171,.7);
+    animation:twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%,100% { opacity:0; transform:scale(.4); }
+    50%     { opacity:1; transform:scale(1.2); }
+  }
+
+  /* ---------- confetti canvas ---------- */
+  #fx{
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:60;
+  }
+
+  /* ---------- opening overlay ---------- */
+  .overlay{
+    position:fixed; inset:0; z-index:50;
+    display:grid; place-items:center;
+    background:linear-gradient(160deg,#fff1f5 0%,#ffe9ef 42%,#fff7ed 100%);
+    transition:opacity 1s ease, visibility 1s ease;
+    cursor:pointer;
+  }
+  .overlay.hide{ opacity:0; visibility:hidden; }
+
+  .open-inner{ text-align:center; padding:24px; }
+
+  .open-btn{
+    position:relative;
+    width:130px; height:130px;
+    border:none; border-radius:50%;
+    background:linear-gradient(145deg,#ffffff,#ffe7ee);
+    box-shadow:
+      0 18px 45px -14px rgba(200,90,140,.45),
+      inset 0 1px 0 rgba(255,255,255,.9);
+    font-size:52px; line-height:1;
+    cursor:pointer;
+    transition:transform .35s cubic-bezier(.2,.8,.3,1);
+    animation:breathe 2.6s ease-in-out infinite;
+  }
+  .open-btn:hover{ transform:scale(1.08); }
+  .open-btn:active{ transform:scale(.95); }
+
+  .open-btn::before,
+  .open-btn::after{
+    content:'';
+    position:absolute; inset:0;
+    border-radius:50%;
+    border:1px solid rgba(255,143,171,.55);
+    animation:ring 2.8s ease-out infinite;
+  }
+  .open-btn::after{ animation-delay:1.4s; }
+
+  @keyframes ring{
+    0%   { transform:scale(1);   opacity:.7; }
+    100% { transform:scale(2.1); opacity:0;  }
+  }
+  @keyframes breathe{
+    0%,100% { box-shadow:0 18px 45px -14px rgba(200,90,140,.45); }
+    50%     { box-shadow:0 22px 60px -12px rgba(200,90,140,.65); }
+  }
+
+  .open-hint{
+    margin-top:32px;
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.45rem;
+    letter-spacing:.02em;
+    color:var(--deep);
+  }
+  .open-sub{
+    margin-top:10px;
+    font-size:.7rem;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  /* ---------- music toggle ---------- */
+  .music-toggle{
+    position:fixed;
+    top:20px; right:20px;
+    z-index:55;
+    width:46px; height:46px;
+    border-radius:50%;
+    border:1px solid rgba(255,143,171,.35);
+    background:rgba(255,255,255,.75);
+    -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px);
+    box-shadow:0 8px 24px -8px rgba(200,90,140,.4);
+    cursor:pointer;
+    display:grid;
+    place-items:center;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-12px);
+    transition:opacity .5s ease, transform .5s ease, visibility .5s;
+    color:#c9416f;
+  }
+  .music-toggle.show{
+    opacity:1;
+    visibility:visible;
+    transform:none;
+  }
+  .music-toggle:hover{
+    transform:scale(1.08);
+    box-shadow:0 10px 28px -8px rgba(200,90,140,.55);
+  }
+  .music-toggle svg{ width:20px; height:20px; }
+  .music-toggle .icon-off{ display:none; }
+  .music-toggle.muted .icon-on{ display:none; }
+  .music-toggle.muted .icon-off{ display:block; }
+
+  /* subtle pulse when music plays */
+  .music-toggle.playing::after{
+    content:'';
+    position:absolute;
+    inset:-4px;
+    border-radius:50%;
+    border:1.5px solid rgba(255,143,171,.6);
+    animation:musicPulse 2.4s ease-out infinite;
+    pointer-events:none;
+  }
+  @keyframes musicPulse{
+    0%   { transform:scale(1);   opacity:.8; }
+    100% { transform:scale(1.6); opacity:0;  }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100svh;
+    display:grid;
+    place-content:center;
+    text-align:center;
+    padding:96px 22px 48px;
+    position:relative;
+  }
+
+  .eyebrow{
+    font-size:.7rem;
+    letter-spacing:.55em;
+    text-transform:uppercase;
+    color:var(--muted);
+    font-weight:500;
+    margin-bottom:20px;
+    padding-left:.55em;
+  }
+
+  .name-wrap{
+    position:relative;
+    display:inline-block;
+    padding:0 .18em;
+  }
+
+  .name{
+    font-family:'Great Vibes', cursive;
+    font-weight:400;
+    font-size:clamp(5rem, 26vw, 11rem);
+    line-height:1.15;
+    background:linear-gradient(135deg,#ff9dbb 0%,#e0578a 42%,#c9416f 68%,#e8b96a 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    filter:drop-shadow(0 14px 30px rgba(210,90,140,.28));
+    animation:nameGlow 5s ease-in-out infinite;
+  }
+  @keyframes nameGlow{
+    0%,100% { filter:drop-shadow(0 14px 30px rgba(210,90,140,.25)); }
+    50%     { filter:drop-shadow(0 18px 40px rgba(210,90,140,.45)); }
+  }
+
+  .name-wrap .spark{
+    position:absolute;
+    font-size:1.1rem;
+    color:#e8b96a;
+    text-shadow:0 0 10px rgba(232,185,106,.9);
+    animation:sparkleFloat 3.6s ease-in-out infinite;
+    pointer-events:none;
+  }
+  .name-wrap .spark.s1{ top:-8%; left:-6%; animation-delay:0s; }
+  .name-wrap .spark.s2{ top:14%; right:-8%; animation-delay:.7s; }
+  .name-wrap .spark.s3{ bottom:-4%; left:12%; animation-delay:1.4s; }
+  .name-wrap .spark.s4{ bottom:8%; right:6%; animation-delay:2.1s; }
+  @keyframes sparkleFloat{
+    0%,100% { opacity:0; transform:scale(.4) translateY(0); }
+    50%     { opacity:1; transform:scale(1.15) translateY(-6px); }
+  }
+
+  .tagline{
+    margin-top:14px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(1.15rem, 1rem + 1.2vw, 1.65rem);
+    color:#a4526f;
+    font-weight:300;
+  }
+
+  .rule{
+    width:56px; height:1px;
+    margin:38px auto 0;
+    background:linear-gradient(90deg,transparent,#e9a8bd,transparent);
+  }
+
+  .scroll-cue{
+    position:absolute;
+    bottom:32px; left:50%;
+    transform:translateX(-50%);
+    font-size:.62rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:#d0a3b4;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    opacity:0;
+    animation:fadeInCue 1.4s ease 2.6s forwards;
+  }
+  .scroll-cue .line{
+    width:1px; height:28px;
+    background:linear-gradient(180deg,#e9a8bd,transparent);
+    animation:scrollLine 2.4s ease-in-out infinite;
+  }
+  @keyframes fadeInCue{ to { opacity:.85; } }
+  @keyframes scrollLine{
+    0%,100% { transform:scaleY(1); opacity:.7; }
+    50%     { transform:scaleY(.5); opacity:.4; }
+  }
+
+  /* ---------- letter ---------- */
+  .letter{ padding:0 20px 60px; }
+
+  .card{
+    max-width:680px;
+    margin:0 auto;
+    background:rgba(255,255,255,.78);
+    -webkit-backdrop-filter:blur(18px);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.95);
+    border-radius:34px;
+    padding:clamp(32px, 7vw, 64px);
+    box-shadow:
+      0 50px 100px -50px rgba(180,80,120,.45),
+      0 4px 14px rgba(180,80,120,.06);
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:'';
+    position:absolute;
+    top:-40%; right:-30%;
+    width:70%; height:80%;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(255,214,229,.55), transparent 70%);
+    pointer-events:none;
+  }
+  .card::after{
+    content:'';
+    position:absolute;
+    bottom:-40%; left:-30%;
+    width:70%; height:80%;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(255,240,220,.5), transparent 70%);
+    pointer-events:none;
+  }
+
+  .card-greet{
+    font-family:'Great Vibes', cursive;
+    font-size:clamp(2rem, 1.4rem + 2.6vw, 3.1rem);
+    line-height:1.35;
+    text-align:center;
+    color:#c9416f;
+    margin-bottom:34px;
+    padding-bottom:30px;
+    border-bottom:1px solid rgba(233,168,189,.4);
+    position:relative;
+    z-index:1;
+  }
+
+  .card p{
+    font-family:'Cormorant Garamond', serif;
+    font-size:clamp(1.12rem, 1rem + .6vw, 1.38rem);
+    line-height:1.95;
+    color:var(--ink);
+    margin-bottom:1.2em;
+    font-weight:400;
+    position:relative;
+    z-index:1;
+  }
+  .card p:last-of-type{ margin-bottom:0; }
+
+  .card em{
+    font-style:italic;
+    color:#b0416b;
+  }
+  .card .hl{
+    font-weight:600;
+    color:#c9416f;
+    white-space:nowrap;
+  }
+
+  .sign{
+    margin-top:38px;
+    padding-top:30px;
+    border-top:1px solid rgba(233,168,189,.4);
+    text-align:right;
+    font-family:'Dancing Script', cursive;
+    font-size:1.6rem;
+    color:#c9416f;
+    position:relative;
+    z-index:1;
+  }
+
+  /* ---------- CHAOS GALLERY ---------- */
+  .chaos-section {
+    max-width:960px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+    text-align: center;
+  }
+  .chaos-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    color: #c9416f;
+    margin-bottom: 8px;
+    line-height:1.2;
+  }
+  .chaos-sub {
+    font-size: 0.72rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 48px;
+  }
+
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .polaroid {
+    background: #fff;
+    padding: 12px 12px 52px;
+    border-radius: 4px;
+    box-shadow: 0 12px 30px -8px rgba(180,80,120,.3);
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(.2,.8,.3,1), box-shadow 0.4s ease;
+    width: 170px;
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .polaroid:nth-child(1) { transform: rotate(-4deg); }
+  .polaroid:nth-child(2) { transform: rotate(3deg); }
+  .polaroid:nth-child(3) { transform: rotate(-2deg); }
+  .polaroid:nth-child(4) { transform: rotate(4deg); }
+  .polaroid:nth-child(5) { transform: rotate(-3deg); }
+
+  .polaroid:hover {
+    transform: scale(1.08) rotate(0deg) translateY(-6px);
+    box-shadow: 0 26px 45px -12px rgba(180,80,120,.5);
+    z-index: 10;
+  }
+
+  .polaroid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+    pointer-events: none;
+    filter:saturate(1.05);
+  }
+
+  .polaroid .tape {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 70px;
+    height: 22px;
+    background: rgba(255, 245, 225, 0.75);
+    backdrop-filter: blur(2px);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    z-index: 2;
+  }
+
+  .polaroid .pulse-dot{
+    position:absolute;
+    top:14px; right:14px;
+    width:9px; height:9px;
+    border-radius:50%;
+    background:#ff5d8f;
+    box-shadow:0 0 0 0 rgba(255,93,143,.7);
+    animation:pulseDot 2.2s ease-out infinite;
+    z-index:3;
+  }
+  @keyframes pulseDot{
+    0%   { box-shadow:0 0 0 0 rgba(255,93,143,.7); }
+    70%  { box-shadow:0 0 0 12px rgba(255,93,143,0); }
+    100% { box-shadow:0 0 0 0 rgba(255,93,143,0); }
+  }
+
+  /* ---------- MODAL ---------- */
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(40, 10, 20, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    justify-content: center;
+    align-items: center;
+    padding: 22px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .modal.show {
+    display: flex;
+    opacity: 1;
+  }
+
+  .modal-content {
+    background: #fff;
+    border-radius: 24px;
+    max-width: 420px;
+    width: 100%;
+    padding: 18px 18px 24px;
+    text-align: center;
+    position: relative;
+    transform: scale(0.88) translateY(20px);
+    transition: transform 0.4s cubic-bezier(.2,.9,.3,1.2);
+    box-shadow: 0 30px 70px -12px rgba(0,0,0,0.55);
+  }
+  .modal.show .modal-content {
+    transform: scale(1) translateY(0);
+  }
+
+  .modal-content img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 14px;
+    margin-bottom: 18px;
+  }
+
+  .modal-caption {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.18rem;
+    line-height: 1.6;
+    color: var(--ink);
+    font-style: italic;
+    padding:0 6px;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.22);
+    display: grid;
+    place-items: center;
+    color: var(--deep);
+    transition: transform 0.2s ease;
+    line-height:1;
+  }
+  .modal-close:hover { transform: scale(1.12) rotate(90deg); }
+
+  /* ---------- closing wish ---------- */
+  .closing{
+    max-width:640px;
+    margin:0 auto 90px;
+    padding: 0 24px;
+    text-align:center;
+  }
+  .closing p{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(1.2rem, 1rem + 1vw, 1.55rem);
+    line-height:1.85;
+    color:#a4526f;
+  }
+  .closing .hearts-row{
+    margin-top:24px;
+    font-size:1.4rem;
+    letter-spacing:.4em;
+    color:#e9a8bd;
+  }
+
+  /* ---------- footer ---------- */
+  .foot{
+    text-align:center;
+    padding:26px 20px 64px;
+    font-size:.7rem;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:#d0a3b4;
+  }
+
+  /* ---------- reveal animation ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(30px);
+    transition:opacity 1.1s cubic-bezier(.2,.7,.3,1),
+               transform 1.1s cubic-bezier(.2,.7,.3,1);
+  }
+  .reveal.in{ opacity:1; transform:none; }
+
+  .hero .reveal:nth-child(1){ transition-delay:.05s; }
+  .hero .reveal:nth-child(2){ transition-delay:.22s; }
+  .hero .reveal:nth-child(3){ transition-delay:.42s; }
+  .hero .reveal:nth-child(4){ transition-delay:.58s; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition-duration:.01ms !important; }
+    .reveal{ opacity:1; transform:none; }
+  }
+
+  @media (max-width: 480px){
+    .polaroid{ width: 145px; height: 195px; }
+    .modal-content img{ height: 240px; }
+  }
+</style>
+</head>
+
+<body>
+  <div class="bg"></div>
+  <div class="hearts" id="hearts"></div>
+  <div class="sparkles" id="sparkles"></div>
+  <canvas id="fx"></canvas>
+
+  <!-- ===== Music ===== -->
+  <audio id="bgMusic" loop preload="auto" playsinline>
+    <!-- 🎵 REPLACE "music.mp3" with your own song file in the same folder -->
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <button class="music-toggle" id="musicToggle" aria-label="Toggle music">
+    <svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 5 6 9H2v6h4l5 4V5z"/>
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+    </svg>
+    <svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 5 6 9H2v6h4l5 4V5z"/>
+      <line x1="23" y1="9" x2="17" y2="15"/>
+      <line x1="17" y1="9" x2="23" y2="15"/>
+    </svg>
+  </button>
+
+  <!-- ===== Opening screen ===== -->
+  <div class="overlay" id="overlay">
+    <div class="open-inner">
+      <button class="open-btn" id="openBtn" aria-label="Open your gift">🤍</button>
+      <p class="open-hint">A little something for you</p>
+      <p class="open-sub">tap to open</p>
+    </div>
+  </div>
+
+  <!-- ===== Page ===== -->
+  <main>
+    <header class="hero">
+      <p class="eyebrow reveal">Happy Birthday</p>
+      <div class="name-wrap reveal">
+        <span class="spark s1">✦</span>
+        <span class="spark s2">✦</span>
+        <span class="spark s3">✦</span>
+        <span class="spark s4">✦</span>
+        <h1 class="name">Taiwo</h1>
+      </div>
+      <p class="tagline reveal">my sweet, sweet girl 🤍</p>
+      <div class="rule reveal"></div>
+      <div class="scroll-cue">
+        <span>scroll</span>
+        <span class="line"></span>
+      </div>
+    </header>
+
+    <!-- Letter Section -->
+    <section class="letter">
+      <div class="card">
+        <p class="card-greet reveal">Happy birthday, my sweet sweet girl ❤️</p>
+
+        <p class="reveal">I pray Almighty Allah grants all your heart desires and blesses you beyond your expectations.</p>
+
+        <p class="reveal">Who would have thought that one random conversation in FSTC — <em>“Do you live in Obanikoro? That’s my grandma’s place”</em> — would lead to all of this? You’ve been nothing but a sweet girl, inside and out, and I’m genuinely grateful for the gift of you.</p>
+
+        <p class="reveal">I’ll never forget how you called me on your birthday last year and said, <em>“I know you’ve been looking for how to call me, so I decided to call you so you’ll wish me.”</em> 😂 I smiled so hard. I’ve genuinely never met anyone as crazy as you.</p>
+
+        <p class="reveal">You’d pause your own sleep just to make sure your roommate wasn’t losing her mind — matching my sandals to my clothes, reassuring me my outfit wasn’t weird, and still following me to write JAMB again when I had that bright idea. God bless you 🫶</p>
+
+        <p class="reveal">We’ve had our fair share of ups and downs, but through everything, I’m genuinely grateful that I get to do life with you. You’re such a bright light, and I pray Almighty Allah never lets life steal that beautiful joy from you.</p>
+
+        <p class="reveal">I’m rooting for you, my Taiwo ❤️ I can’t wait to see you taking orders for <span class="hl">Tee’s Treat</span>, doing all the things you’ve always talked about, and becoming everything you’ve always wanted to be.</p>
+
+        <p class="reveal">I hope this new year of your life is softer, kinder, and filled with so many beautiful things. I love you soo, soo much, my baby. ❤️</p>
+
+        <p class="sign reveal">— Happy birthday once again, my sweet girl 🤍</p>
+      </div>
+    </section>
+
+    <!-- Chaos Gallery Section -->
+    <section class="chaos-section reveal">
+      <h2 class="chaos-title">The Chaos Archive 📸</h2>
+      <p class="chaos-sub">tap a picture — I dare you 😭</p>
+      
+      <div class="gallery">
+        <!-- Image 1 -->
+        <div class="polaroid" onclick="openModal('image1.jpg', 'The “we think we ate with this filter” era 💚 We really looked at this and said: moody, mysterious, a little unbothered. The green tint is giving swamp witch, but the face card NEVER declines, baby! 😂')">
+          <div class="tape"></div>
+          <span class="pulse-dot"></span>
+          <img src="image1.jpg" alt="Memory 1" onerror="this.src='https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&q=80'">
+        </div>
+
+        <!-- Image 2 -->
+        <div class="polaroid" onclick="openModal('image2.jpg', 'This is the EXACT face Taiwo makes when I say “I’m hungry” but I don’t know what I want to eat. 😭😭 Pure agony. The most dramatic, unhinged, precious human alive — and I love you for every second of it.')">
+          <div class="tape"></div>
+          <span class="pulse-dot"></span>
+          <img src="image2.jpg" alt="Memory 2" onerror="this.src='https://images.unsplash.com/photo-1543807535-eceef0bc6599?w=500&q=80'">
+        </div>
+
+        <!-- Image 3 -->
+        <div class="polaroid" onclick="openModal('image3.jpg', 'The “we’re going outside” fit! 😎 Oversized tee, headband, zero cares in the world. This is literally the energy of “I’m about to call her so she can wish me happy birthday.” Cute but a MENACE to society. 🫶')">
+          <div class="tape"></div>
+          <span class="pulse-dot"></span>
+          <img src="image3.jpg" alt="Memory 3" onerror="this.src='https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=500&q=80'">
+        </div>
+
+        <!-- Image 4 -->
+        <div class="polaroid" onclick="openModal('image4.jpg', 'Welcome to Tee’s Treat! 👩‍🍳✨ Where the food is 10/10 and the chef looks like she fought the icing and LOST. 😭 The cake was fighting back, but you still smiled through it. My beautiful, hardworking girl — I can’t wait to see this dream take over the whole world! 🤍🎂')">
+          <div class="tape"></div>
+          <span class="pulse-dot"></span>
+          <img src="image4.jpg" alt="Memory 4" onerror="this.src='https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=500&q=80'">
+        </div>
+
+        <!-- Image 5 -->
+        <div class="polaroid" onclick="openModal('image5.jpg', 'Blue lighting, mask on, zero clue what we’re doing but doing it TOGETHER. 😭 The late-night delulu talks, the random 2am mirror selfies, the absolute chaos... unhinged, iconic, and entirely ours. Never change, my sweet girl. 💙')">
+          <div class="tape"></div>
+          <span class="pulse-dot"></span>
+          <img src="image5.jpg" alt="Memory 5" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&q=80'">
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing -->
+    <section class="closing reveal">
+      <p>You are so loved, so prayed for, and so deeply cherished.<br>Here’s to softer days, louder laughter, and every single dream coming true. 🤍</p>
+      <div class="hearts-row">❤️ 🤍 ❤️</div>
+    </section>
+
+    <footer class="foot">Made with love, from YoYo baby🥰</footer>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal(event)">×</button>
+      <img id="modalImg" src="" alt="Memory">
+      <p class="modal-caption" id="modalCaption"></p>
+    </div>
+  </div>
+
+<script>
+(function () {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- floating hearts ---------- */
+  const heartsLayer = document.getElementById('hearts');
+  if (!reduceMotion) {
+    const glyphs = ['❤️', '🤍', '💗', '🌸', '✨', '💖'];
+    for (let i = 0; i < 18; i++) {
+      const s = document.createElement('span');
+      s.textContent = glyphs[i % glyphs.length];
+      s.style.left = (Math.random() * 100).toFixed(2) + '%';
+      s.style.fontSize = (11 + Math.random() * 20).toFixed(1) + 'px';
+      s.style.animationDuration = (15 + Math.random() * 17).toFixed(1) + 's';
+      s.style.animationDelay = (-Math.random() * 30).toFixed(1) + 's';
+      heartsLayer.appendChild(s);
+    }
+  }
+
+  /* ---------- sparkles ---------- */
+  const sparkleLayer = document.getElementById('sparkles');
+  if (!reduceMotion) {
+    for (let i = 0; i < 26; i++) {
+      const s = document.createElement('span');
+      s.style.left = (Math.random() * 100).toFixed(2) + '%';
+      s.style.top = (Math.random() * 100).toFixed(2) + '%';
+      s.style.animationDelay = (-Math.random() * 3).toFixed(2) + 's';
+      s.style.animationDuration = (2.4 + Math.random() * 2.4).toFixed(2) + 's';
+      sparkleLayer.appendChild(s);
+    }
+  }
+
+  /* ---------- confetti ---------- */
+  const cv = document.getElementById('fx');
+  const ctx = cv.getContext('2d');
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
+  let W = 0, H = 0, raf = null;
+  const particles = [];
+  const COLORS = ['#ff8fab', '#ffc2d1', '#e8b96a', '#ffffff', '#ff5d8f', '#ffd6a5', '#c9416f'];
+
+  function resize() {
+    W = cv.width = Math.floor(innerWidth * DPR);
+    H = cv.height = Math.floor(innerHeight * DPR);
+    cv.style.width = innerWidth + 'px';
+    cv.style.height = innerHeight + 'px';
+  }
+  resize();
+  addEventListener('resize', resize);
+
+  function drawHeart(size) {
+    const s = size / 16;
+    ctx.beginPath();
+    ctx.moveTo(0, -3 * s);
+    ctx.bezierCurveTo(0, -6 * s, -8 * s, -6 * s, -8 * s, -1 * s);
+    ctx.bezierCurveTo(-8 * s, 3 * s, -3 * s, 6 * s, 0, 9 * s);
+    ctx.bezierCurveTo(3 * s, 6 * s, 8 * s, 3 * s, 8 * s, -1 * s);
+    ctx.bezierCurveTo(8 * s, -6 * s, 0, -6 * s, 0, -3 * s);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  function makeParticle(opts) {
+    return Object.assign({
+      x: 0, y: 0, vx: 0, vy: 0,
+      g: 0.17 * DPR,
+      s: (5 + Math.random() * 7) * DPR,
+      color: COLORS[(Math.random() * COLORS.length) | 0],
+      rot: Math.random() * Math.PI * 2,
+      vr: (Math.random() - 0.5) * 0.28,
+      life: 1,
+      decay: 0.005 + Math.random() * 0.006,
+      heart: Math.random() < 0.3
+    }, opts);
+  }
+
+  function ensureLoop() {
+    if (raf === null) raf = requestAnimationFrame(tick);
+  }
+
+  function tick() {
+    ctx.clearRect(0, 0, W, H);
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.vy += p.g;
+      p.vx *= 0.995;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.vr;
+      p.life -= p.decay;
+
+      if (p.life <= 0 || p.y > H + 120 * DPR) {
+        particles.splice(i, 1);
+        continue;
+      }
+
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, Math.min(1, p.life));
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      if (p.heart) drawHeart(p.s);
+      else ctx.fillRect(-p.s / 2, -p.s / 2, p.s, p.s * 0.58);
+      ctx.restore();
+    }
+
+    if (particles.length) {
+      raf = requestAnimationFrame(tick);
+    } else {
+      raf = null;
+      ctx.clearRect(0, 0, W, H);
+    }
+  }
+
+  function burst() {
+    if (reduceMotion) return;
+    const cx = (innerWidth / 2) * DPR;
+    const cy = innerHeight * 0.42 * DPR;
+
+    for (let i = 0; i < 170; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const sp = (2 + Math.random() * 11) * DPR;
+      particles.push(makeParticle({
+        x: cx, y: cy,
+        vx: Math.cos(a) * sp,
+        vy: Math.sin(a) * sp - 5 * DPR
+      }));
+    }
+
+    const start = performance.now();
+    (function drop() {
+      if (performance.now() - start > 2600) { ensureLoop(); return; }
+      for (let i = 0; i < 4; i++) {
+        particles.push(makeParticle({
+          x: Math.random() * W,
+          y: -30 * DPR,
+          vx: (Math.random() - 0.5) * 1.6 * DPR,
+          vy: (1.5 + Math.random() * 2.5) * DPR,
+          g: 0.05 * DPR,
+          decay: 0.003 + Math.random() * 0.004
+        }));
+      }
+      requestAnimationFrame(drop);
+    })();
+
+    ensureLoop();
+  }
+
+  /* ---------- music ---------- */
+  const music = document.getElementById('bgMusic');
+  const musicToggle = document.getElementById('musicToggle');
+  let musicStarted = false;
+
+  function setVolumeSmooth(target, duration = 1800) {
+    const startVol = music.volume;
+    const startTime = performance.now();
+    function step(now) {
+      const t = Math.min(1, (now - startTime) / duration);
+      // ease-out
+      const eased = 1 - Math.pow(1 - t, 3);
+      music.volume = Math.max(0, Math.min(1, startVol + (target - startVol) * eased));
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function startMusic() {
+    if (musicStarted) return;
+    musicStarted = true;
+    music.volume = 0;
+    const playPromise = music.play();
+    if (playPromise && playPromise.then) {
+      playPromise.then(() => {
+        musicToggle.classList.add('playing');
+        musicToggle.classList.remove('muted');
+        setVolumeSmooth(0.55, 2200);
+      }).catch(() => {
+        // Autoplay blocked — let user tap the button
+        musicToggle.classList.add('muted');
+        musicToggle.classList.remove('playing');
+      });
+    }
+  }
+
+  musicToggle.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (music.paused) {
+      music.volume = 0;
+      music.play().then(() => {
+        musicToggle.classList.add('playing');
+        musicToggle.classList.remove('muted');
+        setVolumeSmooth(0.55, 1200);
+      }).catch(() => {});
+    } else {
+      setVolumeSmooth(0, 700);
+      musicToggle.classList.remove('playing');
+      musicToggle.classList.add('muted');
+      setTimeout(() => { if (!music.paused) music.pause(); }, 750);
+    }
+  });
+
+  /* ---------- open the gift ---------- */
+  const overlay = document.getElementById('overlay');
+  const openBtn = document.getElementById('openBtn');
+  const heroEls = document.querySelectorAll('.hero .reveal');
+  let opened = false;
+
+  document.body.style.overflow = 'hidden';
+
+  function setupScrollReveal() {
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      if (!el.classList.contains('in')) io.observe(el);
+    });
+  }
+
+  function open() {
+    if (opened) return;
+    opened = true;
+
+    overlay.classList.add('hide');
+    document.body.style.overflow = '';
+    burst();
+    startMusic();
+
+    // show music toggle after a beat
+    setTimeout(() => musicToggle.classList.add('show'), 900);
+
+    setTimeout(function () {
+      heroEls.forEach(function (el) { el.classList.add('in'); });
+    }, 220);
+
+    setTimeout(setupScrollReveal, 500);
+    setTimeout(function () { if (overlay.parentNode) overlay.remove(); }, 1200);
+  }
+
+  openBtn.addEventListener('click', function (e) { e.stopPropagation(); open(); });
+  overlay.addEventListener('click', open);
+  overlay.addEventListener('touchend', function (e) { e.preventDefault(); open(); }, { passive: false });
+
+  addEventListener('keydown', function (e) {
+    if (!opened && (e.key === 'Enter' || e.key === ' ')) open();
+  });
+})();
+
+/* ---------- MODAL LOGIC ---------- */
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modalImg');
+const modalCaption = document.getElementById('modalCaption');
+
+function openModal(imgSrc, captionText) {
+  modalImg.src = imgSrc;
+  modalCaption.textContent = captionText;
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e) e.stopPropagation();
+  modal.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape' && modal.classList.contains('show')) closeModal(e);
+});
+</script>
+</body>
+</html>
