@@ -613,8 +613,7 @@
   <canvas id="fx"></canvas>
 
   <!-- ===== Music ===== -->
-  <audio id="bgMusic" loop preload="auto" playsinline>
-    <!-- 🎵 REPLACE "music.mp3" with your own song file in the same folder -->
+  <audio id="bgMusic" loop preload="metadata" playsinline>
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
@@ -926,11 +925,17 @@
         musicToggle.classList.remove('muted');
         setVolumeSmooth(0.55, 2200);
       }).catch(() => {
+        musicStarted = false;
         musicToggle.classList.add('muted');
         musicToggle.classList.remove('playing');
+        musicToggle.classList.add('show');
       });
     }
   }
+
+  document.addEventListener('click', function fallbackMusic() {
+    if (!musicStarted) startMusic();
+  }, { once: true });
 
   musicToggle.addEventListener('click', function (e) {
     e.stopPropagation();
