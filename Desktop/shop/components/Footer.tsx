@@ -1,8 +1,8 @@
-// components/Footer.tsx
+// components/Footer.tsx (updated)
 'use client'
 
 import Link from 'next/link'
-import { FiFacebook, FiTwitter, FiInstagram, FiMail, FiPhone } from 'react-icons/fi'
+import { FiFacebook, FiTwitter, FiInstagram, FiMail, FiPhone, FiHeart, FiTag, FiMapPin } from 'react-icons/fi'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -32,26 +32,26 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
+            <h3 className="text-xl font-bold mb-4">Shop</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/about" className="text-gray-400 hover:text-primary transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
                 <Link href="/products" className="text-gray-400 hover:text-primary transition-colors">
-                  Products
+                  All Products
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-gray-400 hover:text-primary transition-colors">
-                  FAQ
+                <Link href="/categories" className="text-gray-400 hover:text-primary transition-colors">
+                  Categories
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-primary transition-colors">
-                  Contact
+                <Link href="/promotions" className="text-gray-400 hover:text-primary transition-colors">
+                  Promotions
+                </Link>
+              </li>
+              <li>
+                <Link href="/wishlist" className="text-gray-400 hover:text-primary transition-colors">
+                  Wishlist
                 </Link>
               </li>
             </ul>
@@ -62,18 +62,23 @@ export default function Footer() {
             <h3 className="text-xl font-bold mb-4">Support</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/terms" className="text-gray-400 hover:text-primary transition-colors">
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy" className="text-gray-400 hover:text-primary transition-colors">
-                  Privacy Policy
+                <Link href="/about" className="text-gray-400 hover:text-primary transition-colors">
+                  About Us
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="text-gray-400 hover:text-primary transition-colors">
-                  Customer Support
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" className="text-gray-400 hover:text-primary transition-colors">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/orders/track" className="text-gray-400 hover:text-primary transition-colors">
+                  Track Order
                 </Link>
               </li>
               <li>
@@ -100,23 +105,43 @@ export default function Footer() {
                   support@shophub.com
                 </a>
               </div>
-              <div className="mt-4">
-                <a
-                  href="https://wa.me/2347088028747"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
-                >
-                  <FiMail />
-                  Chat on WhatsApp
-                </a>
+              <div className="flex items-center gap-3 text-gray-400">
+                <FiMapPin />
+                <span>Lagos, Nigeria</span>
               </div>
+            </div>
+            <div className="mt-4">
+              <a
+                href="https://wa.me/2347088028747"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
+              >
+                <FiMail />
+                Chat on WhatsApp
+              </a>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; {currentYear} ShopHub. All rights reserved.</p>
+        {/* Legal Links */}
+        <div className="border-t border-gray-800 mt-8 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-400 text-sm">
+              &copy; {currentYear} ShopHub. All rights reserved.
+            </p>
+            <div className="flex gap-6">
+              <Link href="/terms" className="text-gray-400 hover:text-primary text-sm transition-colors">
+                Terms of Service
+              </Link>
+              <Link href="/privacy" className="text-gray-400 hover:text-primary text-sm transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/returns" className="text-gray-400 hover:text-primary text-sm transition-colors">
+                Returns Policy
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

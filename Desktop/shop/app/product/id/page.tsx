@@ -1,11 +1,12 @@
-// app/product/[id]/page.tsx
+// app/product/[id]/page.tsx (updated with wishlist and reviews)
 'use client'
 
 import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { FiWhatsApp, FiShoppingCart } from 'react-icons/fi'
+import { FiWhatsApp, FiShoppingCart, FiHeart, FiShare2 } from 'react-icons/fi'
 import toast from 'react-hot-toast'
+import ProductReviews from '@/components/ProductReviews'
 
 interface Product {
   id: number
@@ -19,6 +20,7 @@ export default function ProductDetailPage() {
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
   const [quantity, setQuantity] = useState(1)
+  const [isInWishlist, setIsInWishlist] = useState(false)
   const params = useParams()
   const router = useRouter()
   
@@ -28,15 +30,24 @@ export default function ProductDetailPage() {
       .then(data => {
         setProduct(data)
         setLoading(false)
+        
+        // Check if in wishlist
+        const wishlist = localStorage.getItem('wishlist')
+        if (wishlist) {
+          const items = JSON.parse(wishlist)
+          setIsInWishlist(items.some((item: any) => item.id === data.id))
+        }
       })
       .catch(() => setLoading(false))
   }, [params.id])
   
   const addToCart = () => {
+    if (!product) return
+    
     const cart = localStorage.getItem('cart')
     let cartItems = cart ? JSON.parse(cart) : []
     
-    const existingItem = cartItems.find((item: any) => item.id === product?.id)
+    const existingItem = cartItems.find((item: any) => item.id === product.id)
     
     if (existingItem) {
       existingItem.quantity += quantity
@@ -46,7 +57,39 @@ export default function ProductDetailPage() {
     
     localStorage.setItem('cart', JSON.stringify(cartItems))
     window.dispatchEvent(new Event('storage'))
-    toast.success(`${product?.name} added to cart!`)
+    toast.success(`${product.name} added to cart!`)
+  }
+  
+  const toggleWishlist = () => {
+    if (!product) return
+    
+    const wishlist = localStorage.getItem('wishlist')
+    let wishlistItems = wishlist ? JSON.parse(wishlist) : []
+    
+    if (isInWishlist) {
+      wishlistItems = wishlistItems.filter((item: any) => item.id !== product.id)
+      toast.success('Removed from wishlist')
+    } else {
+      wishlistItems.push(product)
+      toast.success('Added to wishlist')
+    }
+    
+    localStorage.setItem('wishlist', JSON.stringify(wishlistItems))
+    setIsInWishlist(!isInWishlist)
+    window.dispatchEvent(new Event('storage'))
+  }
+  
+  const shareProduct = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: product?.name,
+        text: product?.description,
+        url: window.location.href,
+      })
+    } else {
+      navigator.clipboard.writeText(window.location.href)
+      toast.success('Link copied to clipboard!')
+    }
   }
   
   const orderOnWhatsApp = () => {
@@ -144,8 +187,33 @@ export default function ProductDetailPage() {
               Order on WhatsApp
             </button>
           </div>
+          
+          {/* Secondary Actions */}
+          <div className="flex gap-4 pt-4 border-t">
+            <button
+              onClick={toggleWishlist}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                isInWishlist
+                  ? 'bg-red-500 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              <FiHeart className={isInWishlist ? 'fill-current' : ''} />
+              {isInWishlist ? 'In Wishlist' : 'Add to Wishlist'}
+            </button>
+            <button
+              onClick={shareProduct}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+            >
+              <FiShare2 />
+              Share
+            </button>
+          </div>
         </div>
       </div>
+      
+      {/* Reviews Section */}
+      <ProductReviews productId={product.id} />
     </div>
   )
 }

@@ -4,16 +4,18 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { FiShoppingCart, FiMenu, FiX, FiChevronDown } from 'react-icons/fi'
+import { FiShoppingCart, FiMenu, FiX, FiChevronDown, FiHeart, FiTag } from 'react-icons/fi'
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [cartCount, setCartCount] = useState(0)
+  const [wishlistCount, setWishlistCount] = useState(0)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const pathname = usePathname()
   
   useEffect(() => {
-    const updateCartCount = () => {
+    const updateCounts = () => {
+      // Update cart count
       const cart = localStorage.getItem('cart')
       if (cart) {
         const items = JSON.parse(cart)
@@ -21,24 +23,35 @@ export default function Navbar() {
       } else {
         setCartCount(0)
       }
+      
+      // Update wishlist count
+      const wishlist = localStorage.getItem('wishlist')
+      if (wishlist) {
+        const items = JSON.parse(wishlist)
+        setWishlistCount(items.length)
+      } else {
+        setWishlistCount(0)
+      }
     }
     
-    updateCartCount()
-    window.addEventListener('storage', updateCartCount)
+    updateCounts()
+    window.addEventListener('storage', updateCounts)
     
-    return () => window.removeEventListener('storage', updateCartCount)
+    return () => window.removeEventListener('storage', updateCounts)
   }, [])
   
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/products', label: 'Products' },
-    { href: '/about', label: 'About' },
+    { href: '/categories', label: 'Categories' },
+    { href: '/promotions', label: 'Promotions', icon: FiTag },
   ]
   
   const dropdownLinks = [
+    { href: '/about', label: 'About Us' },
     { href: '/faq', label: 'FAQ' },
     { href: '/contact', label: 'Contact' },
-    { href: '/returns', label: 'Returns' },
+    { href: '/orders/track', label: 'Track Order' },
   ]
   
   return (
@@ -55,10 +68,11 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-gray-300 hover:text-white transition-colors duration-200 ${
+                className={`flex items-center gap-1 text-gray-300 hover:text-white transition-colors duration-200 ${
                   pathname === link.href ? 'text-primary' : ''
                 }`}
               >
+                {link.icon && <link.icon size={16} />}
                 {link.label}
               </Link>
             ))}
@@ -89,6 +103,18 @@ export default function Navbar() {
             </div>
             
             <Link
+              href="/wishlist"
+              className="relative text-gray-300 hover:text-white transition-colors duration-200"
+            >
+              <FiHeart className="text-2xl" />
+              {wishlistCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+            
+            <Link
               href="/cart"
               className="relative text-gray-300 hover:text-white transition-colors duration-200"
             >
@@ -117,11 +143,10 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`block py-2 text-gray-300 hover:text-white transition-colors duration-200 ${
-                  pathname === link.href ? 'text-primary' : ''
-                }`}
+                className="flex items-center gap-2 py-2 text-gray-300 hover:text-white transition-colors duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
+                {link.icon && <link.icon size={16} />}
                 {link.label}
               </Link>
             ))}
@@ -136,11 +161,29 @@ export default function Navbar() {
               </Link>
             ))}
             <Link
+              href="/wishlist"
+              className="flex items-center justify-between py-2 text-gray-300 hover:text-white transition-colors duration-200"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <span className="flex items-center gap-2">
+                <FiHeart />
+                Wishlist
+              </span>
+              {wishlistCount > 0 && (
+                <span className="bg-accent text-white text-xs rounded-full px-2 py-1">
+                  {wishlistCount} items
+                </span>
+              )}
+            </Link>
+            <Link
               href="/cart"
               className="flex items-center justify-between py-2 text-gray-300 hover:text-white transition-colors duration-200"
               onClick={() => setIsMenuOpen(false)}
             >
-              <span>Cart</span>
+              <span className="flex items-center gap-2">
+                <FiShoppingCart />
+                Cart
+              </span>
               {cartCount > 0 && (
                 <span className="bg-accent text-white text-xs rounded-full px-2 py-1">
                   {cartCount} items

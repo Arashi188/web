@@ -1,40 +1,40 @@
--- supabase/migrations/20240101_initial_schema.sql
--- Products table
-CREATE TABLE products (
+-- supabase/migrations/20240102_add_categories.sql
+
+-- Categories table
+CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
-    price DECIMAL(10,2) NOT NULL,
-    image_url TEXT NOT NULL,
+    slug VARCHAR(255) UNIQUE NOT NULL,
+    description TEXT,
+    image_url TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- Orders table
-CREATE TABLE orders (
-    id VARCHAR(20) PRIMARY KEY,
-    customer_name VARCHAR(255) NOT NULL,
-    phone VARCHAR(50) NOT NULL,
-    total_price DECIMAL(10,2) NOT NULL,
-    status VARCHAR(50) DEFAULT 'pending',
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
+-- Add category_id to products table
+ALTER TABLE products ADD COLUMN category_id INTEGER REFERENCES categories(id);
 
--- Order items table
-CREATE TABLE order_items (
+-- Insert some sample categories
+INSERT INTO categories (name, slug, description, image_url) VALUES
+('Electronics', 'electronics', 'Latest gadgets and electronic devices', 'https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg'),
+('Fashion', 'fashion', 'Trendy clothing and accessories', 'https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg'),
+('Home & Living', 'home-living', 'Beautiful items for your home', 'https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg'),
+('Sports', 'sports', 'Sports equipment and gear', 'https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg');
+
+-- Promotions table
+CREATE TABLE promotions (
     id SERIAL PRIMARY KEY,
-    order_id VARCHAR(20) REFERENCES orders(id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    discount_percent INTEGER NOT NULL,
+    code VARCHAR(50) UNIQUE NOT NULL,
+    valid_until DATE NOT NULL,
+    image_url TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Promotion products (many-to-many)
+CREATE TABLE promotion_products (
+    promotion_id INTEGER REFERENCES promotions(id) ON DELETE CASCADE,
     product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
-    quantity INTEGER NOT NULL
+    PRIMARY KEY (promotion_id, product_id)
 );
-
--- Admin users table
-CREATE TABLE admin_users (
-    id SERIAL PRIMARY KEY,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-
--- Insert default admin user (password: admin123)
-INSERT INTO admin_users (email, password_hash) 
-VALUES ('admin@example.com', '$2a$10$rV1aZU1YQGZv5UJqJY5YQOeW5FdQqFJvQ5YQOeW5FdQqFJvQ5YQOeW5FdQqF');

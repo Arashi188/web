@@ -1,66 +1,64 @@
-// app/api/orders/route.ts
+// app/api/orders/track/route.ts
 import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/lib/db'
-import { getAdminFromCookie } from '@/lib/auth'
-
-export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json()
-    const { customerName, phone, items, totalPrice } = body
-    
-    if (!customerName || !phone || !items || items.length === 0) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
-    }
-    
-    const orderId = await db.orders.create(
-      {
-        customer_name: customerName,
-        phone,
-        total_price: totalPrice,
-      },
-      items
-    )
-    
-    return NextResponse.json({ orderId })
-  } catch (error) {
-    console.error('Error creating order:', error)
-    return NextResponse.json({ error: 'Failed to create order' }, { status: 500 })
-  }
-}
+import { supabase } from '@/lib/supabase'
 
 export async function GET(request: NextRequest) {
   try {
-    const admin = await getAdminFromCookie()
-    if (!admin) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const { searchParams } = new URL(request.url)
+    const orderId = searchParams.get('id')
+    
+    if (!orderId) {
+      return NextResponse.json({ error: 'Order ID required' }, { status: 400 })
     }
     
-    const orders = await db.orders.getAll()
-    return NextResponse.json(orders)
+    // Fetch order
+    const { data: order, error: orderError } = await supabase
+      .from('orders')
+      .select('*')
+      .eq('id', orderId.toUpperCase())
+      .single()
+    
+    if (orderError || !order) {
+      return NextResponse.json({ error: 'Order not found' }, { status: 404 })
+    }
+    
+    // Fetch order items
+    const { data: items, error: itemsError } = await supabase
+      .from('order_items')
+      .select(`
+        quantity,
+        products (
+          id,
+          name,
+          price
+        )
+      `)
+      .eq('order_id', orderId.toUpperCase())
+    
+    if (itemsError) throw itemsError
+    
+    // Calculate estimated delivery (7 days from order date)
+    const orderDate = new Date(order.created_at)
+    const estimatedDelivery = new Date(orderDate)
+    estimatedDelivery.setDate(orderDate.getDate() + 7)
+    
+    const formattedOrder = {
+      id: order.id,
+      customer_name: order.customer_name,
+      total_price: order.total_price,
+      status: order.status,
+      created_at: order.created_at,
+      estimated_delivery: estimatedDelivery.toISOString(),
+      items: items?.map(item => ({
+        name: item.products.name,
+        quantity: item.quantity,
+        price: item.products.price,
+      })) || [],
+    }
+    
+    return NextResponse.json(formattedOrder)
   } catch (error) {
-    console.error('Error fetching orders:', error)
-    return NextResponse.json({ error: 'Failed to fetch orders' }, { status: 500 })
-  }
-}
-
-export async function PUT(request: NextRequest) {
-  try {
-    const admin = await getAdminFromCookie()
-    if (!admin) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
-    
-    const body = await request.json()
-    const { orderId, status } = body
-    
-    if (!orderId || !status) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
-    }
-    
-    await db.orders.updateStatus(orderId, status)
-    return NextResponse.json({ success: true })
-  } catch (error) {
-    console.error('Error updating order:', error)
-    return NextResponse.json({ error: 'Failed to update order' }, { status: 500 })
+    console.error('Error tracking order:', error)
+    return NextResponse.json({ error: 'Failed to track order' }, { status: 500 })
   }
 }

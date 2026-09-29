@@ -1,4 +1,4 @@
-// app/sitemap.ts
+// app/sitemap.ts (updated)
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -7,13 +7,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     '',
     '/products',
+    '/categories',
+    '/promotions',
+    '/wishlist',
+    '/cart',
     '/about',
     '/contact',
     '/faq',
     '/terms',
     '/privacy',
     '/returns',
-    '/cart',
+    '/orders/track',
   ].map(route => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

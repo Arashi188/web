@@ -1,5 +1,6 @@
 // lib/db.ts
 import { supabase } from './supabase'
+import bcrypt from 'bcryptjs'
 
 export interface Product {
   id: number
@@ -7,6 +8,7 @@ export interface Product {
   description: string
   price: number
   image_url: string
+  category_id?: number
   created_at: string
 }
 
@@ -170,7 +172,6 @@ export const db = {
       
       if (error || !data) return false
       
-      const bcrypt = require('bcryptjs')
       return bcrypt.compare(password, data.password_hash)
     },
   },
